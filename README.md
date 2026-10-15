@@ -4,6 +4,8 @@
 
 ### 動きを撮る。モーションをつくる。
 
+**日本語** / [English](README.en.md) · [English website](https://junonnwork.github.io/mocaptyx/en.html)
+
 自作カメラ × 反射マーカー × 全身モーションキャプチャ
 
 **開発中** · Windowsで検証 · VMD / FBX / BVH · VMC
@@ -215,6 +217,8 @@ MOCAPTYX自体の製品化・組み込み、カメラやキットの販売は別
 個人情報、非公開の録画、パスワード、製品化に関する秘密情報は投稿しないでください。
 
 ## English overview
+
+**[Read the full English README](README.en.md)** · **[Visit the English website](https://junonnwork.github.io/mocaptyx/en.html)**
 
 MOCAPTYX is a work-in-progress optical motion capture project using DIY cameras and reflective markers.
 It is being developed for capture, recording, retargeting, VMC output, and VMD / FBX / BVH export.
