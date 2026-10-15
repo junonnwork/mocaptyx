@@ -8,7 +8,7 @@
 
 **開発中** · Windowsで検証 · VMD / FBX / BVH · VMC
 
-[できること](#できること) · [必要なもの](#必要なもの) · [公開予定](#公開予定) · [利用方針](#利用方針) · [企業の方へ](#企業の方へ)
+[できること](#できること) · [必要なもの](#必要なもの) · [公開予定](#公開予定) · [利用方針](#利用方針)
 
 </div>
 
@@ -57,6 +57,16 @@
 | 出力 | VMD・FBX・BVH | モーションを制作ツールで使う |
 | 連携 | VMC出力 | 対応アプリのアバターをリアルタイムに動かす |
 | 確認 | シミュレーションデモ | 実機を使わず動作を確認する |
+
+### ライブも録画も、3Dモデルにフィット
+
+**キャラクターの骨格・体型に合わせて、動きを自動リターゲット。** 腰の高さや脚の長さの違いを合わせ、足の接地を補正します。
+
+- **ライブ**：読み込んだアバターに合わせた動きを、VMCで対応アプリへ送信します。
+- **録画**：保存したモーションをキャラクターに合わせ、プレビューで確認してVMD・FBX・BVHに書き出します。
+- **微調整**：腕やひじの開き、肩・腰の高さ、足の間隔を調整できます。設定はアバターごとに保存します。
+
+対応する人型の骨格が前提です。モデルによっては、骨の対応や体型の微調整が必要です。
 
 ### 撮影から出力まで
 
@@ -141,40 +151,11 @@ VMCはライブの動きを外部アプリへ送るための別の出力経路�
 
 ## 利用方針
 
-**作品づくりに使うことと、MOCAPTYX自体を製品として販売・提供することを分ける方針です。**
+自分で撮影したモーション・動画の配布や販売、収益化を、MOCAPTYX側で制限しない方針です。ソースの学習・改造や、自分用のカメラ製作もできる形で公開を準備しています。
 
-| やりたいこと | 想定する扱い |
-|---|---|
-| 公開ソースを読む・学ぶ・検証する | 正式ライセンスで許可する予定 |
-| 改造し、自分用にビルドして制作に使う | 正式ライセンスで許可する予定 |
-| 自分で使うカメラを製作する | 設計データ公開時に許可する予定 |
-| 自分用の基板・筐体を加工業者へ発注する | 自己使用のための製造委託として許可する方針 |
-| 自分で撮ったモーション・映像を公開、配布、販売、収益化する | **MOCAPTYX側の条件では制限しない方針** |
-| ソフト・改変版を販売、他社製品へ組み込む | **使用料を伴う事前の個別契約** |
-| カメラ完成機・キットを製造販売する | **使用料を伴う事前の個別契約** |
+MOCAPTYX自体の製品化・組み込み、カメラやキットの販売は別途有償ライセンスとなります。ライセンスの買い取りも含め、[メールでお気軽にご相談ください](mailto:junonn.work@gmail.com)。
 
-法人か個人かだけではなく、実際の利用内容で範囲を定める予定です。サービス提供、再配布、共同購入などの境界は、正式ライセンスで明示します。
-
-モデル、楽曲、第三者素材、撮影対象などの権利は別途確認してください。第三者のライブラリやモデルには元のライセンスが適用され、MOCAPTYXの独自条件で上書きしません。
-
-製品化・再販売に制限を設けるため、**OSIの定義でのOSSとは案内しません**。「ソース公開」と「製品化は別途許諾」を明示します。参考：[Open Source Definition](https://opensource.org/osd)
-
-これは方針の説明であり、未公開のコード・設計データへの利用許諾ではありません。正式な条件は各公開物に添付します。詳しくは[利用条件と製品化の方針](LICENSING.md)をご覧ください。
-
-## 企業の方へ
-
-**MOCAPTYXを使った製品の開発・販売、他社製品への組み込み、カメラやキットの製造販売について、個別にご相談いただけます。**
-
-- 通常の有償ライセンスに加え、**一括払いによる買い取り型ライセンスの相談**にも対応します。
-- 独占ライセンスや権利譲渡をご希望の場合も、対象・範囲・既存の権利を確認したうえで個別に協議します。
-- 買い取り型ライセンスが、そのまま著作権の譲渡や無制限の独占権を意味するものではありません。
-- 第三者のライブラリ・モデル・素材の権利や、既に付与された利用許諾は、売却・独占化の対象として一括で約束しません。
-- 金額、対象製品、販売範囲、期間、改変・再許諾、更新・サポートの扱いは個別に協議します。
-
-**相談先：[junonn.work@gmail.com](mailto:junonn.work@gmail.com)**
-
-最初は、検討している製品・用途と、必要な利用範囲をお知らせください。秘密情報や契約情報を公開Issueへ投稿しないでください。
-このページの閲覧やお問い合わせだけで、契約・許諾・支払い義務は生じません。
+正式な条件は各公開物に添付します。第三者のモデル・楽曲などには、それぞれの利用条件が適用されます。[利用方針の補足](LICENSING.md)
 
 ## よくある質問
 
@@ -206,13 +187,6 @@ VMCはライブの動きを外部アプリへ送るための別の出力経路�
 
 </details>
 
-<details>
-<summary><strong>買い取りを相談したら、プロジェクト全体を買えるのですか？</strong></summary>
-
-相談内容に応じて検討します。一括払いの利用ライセンス、独占許諾、権利譲渡はそれぞれ別の契約です。対象・範囲・既存の権利を確認して協議するもので、このページで譲渡や独占を約束するものではありません。
-
-</details>
-
 ## 更新・フィードバック
 
 更新した内容は[更新履歴](CHANGELOG.md)に、今後の予定は[ロードマップ](ROADMAP.md)に記載します。
@@ -229,7 +203,7 @@ This initial repository contains the project overview, development status, roadm
 Application source, distributable builds, camera designs and hand/finger option documentation are planned for later publication.
 An official Steam release is also planned; dates and pricing have not been announced.
 
-The intended terms distinguish creative use from productization. Sharing and monetizing users' own captured motions and videos will not be restricted by MOCAPTYX's terms, subject to third-party rights. Selling or incorporating MOCAPTYX itself is intended to require a separate paid agreement. We also welcome inquiries about one-time-payment licenses, exclusive licensing or rights acquisition, subject to scope, ownership and existing rights. These are not interchangeable and no transfer is granted by this overview.
+We intend to allow sharing and selling your own captured motions and videos. For selling or embedding MOCAPTYX itself, camera kits, or a license buyout, please contact us about a separate paid license.
 
 This is a source-available direction, not an OSI open-source license. Final terms will accompany each released component.
 Business inquiries: [junonn.work@gmail.com](mailto:junonn.work@gmail.com).
