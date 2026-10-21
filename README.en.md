@@ -16,13 +16,17 @@ DIY cameras × Reflective markers × Full-body motion capture
 
 ---
 
+> [!TIP]
+> **Beta testers wanted — no cameras needed.** Get release and test news through the [sign-up form](https://forms.gle/EnTDDLQHy5YLFY2c7). Questions and sharing your work: [Discord](https://discord.gg/qUdTBeSRC).
+
 **MOCAPTYX is a project for capturing full-body movement with DIY cameras and reflective markers, then bringing that motion into character animation and creative work.**
 
 Record your dance or performance, fit the motion to a character, and export it. We are building a workflow for creating animations and sharing motion data.
 
 > [!NOTE]
 > **Available now: project information, demonstration videos, sample motions, development updates, release plans, and our intended licensing policy.**
-> The application source, distributable builds, DIY camera designs, and hand/finger options are being prepared for release.
+> The application source, distributable builds, and hand/finger options are being prepared for release.
+> The DIY camera's [development status](https://junonnwork.github.io/mocaptyx/camera-en.html) is online; its build guide, case files, parts list, and firmware will be published together with the app.
 > The finished app and camera kits are not yet available.
 
 ## See it in motion
@@ -133,7 +137,7 @@ Processing time depends on recording length, selected outputs, the model, and PC
 | Item | Current requirements |
 |---|---|
 | PC | Primarily developed and tested on Windows; minimum and recommended specifications are being prepared |
-| Cameras | A compatible optical camera setup; design, parts, and connection details are planned |
+| Cameras | Marker cameras built from off-the-shelf parts (8 as standard). [Development status](https://junonnwork.github.io/mocaptyx/camera-en.html) online; build guide and parts list come with the app |
 | Markers | Reflective body markers, with suitable placement and attachment |
 | Capture space | Camera coverage of the body and a calibrated capture area |
 | Creative tools | MMD, animation tools, VMC receivers, or other apps as needed |
@@ -164,7 +168,7 @@ We are testing the full capture-to-export workflow, investigating issues in real
 |---|---|---|
 | **Project information** | Published first | This README, features, development status, plans, and intended licensing policy |
 | **Application source** | Planned | Selected source code, build/setup instructions, and final terms |
-| **DIY cameras** | Planned | PCB and enclosure designs, parts lists, assembly and setup instructions |
+| **DIY cameras** | **Development status online** / build guide and data planned with the app | Current parts, rough cost, and case v1/v3 [shown here](https://junonnwork.github.io/mocaptyx/camera-en.html). With the app: build guide, case files (STL, STEP), parts list with links, firmware. Own camera board in development |
 | **Hand/finger options** | Planned | Hardware configuration, supported scope, setup, and integration |
 | **Official application** | Steam release planned | A packaged distribution; date, price, and contents are not yet announced |
 | **Guides and samples** | Being prepared in stages | Setup and capture examples, adjustment guides, usage examples, and other options |
@@ -191,7 +195,7 @@ Not yet. This repository provides project information, demonstration videos, and
 <details>
 <summary><strong>Will camera and hand/finger option data be released?</strong></summary>
 
-That is the plan. Camera materials will include PCB and enclosure designs, parts lists, and assembly information. Hand/finger materials will cover configuration, supported scope, and integration. Release dates and final specifications have not been set.
+For the camera, the [development status](https://junonnwork.github.io/mocaptyx/camera-en.html) is online, and the build guide, case files, parts list, and firmware will be published together with the app. Hand/finger materials will cover configuration, supported scope, and integration. Release dates and final specifications have not been set.
 
 </details>
 
@@ -217,4 +221,4 @@ Issues are welcome. For bug reports, include your environment, steps to reproduc
 
 ---
 
-MOCAPTYX · by junonnwork · In development · Updated: 2026-10-15
+MOCAPTYX · by junonnwork · In development · Updated: 2026-10-21

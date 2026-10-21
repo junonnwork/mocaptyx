@@ -16,13 +16,17 @@
 
 ---
 
+> [!TIP]
+> **βテスター募集中：カメラなしで試せます。**公開やテストのお知らせは[登録フォーム](https://forms.gle/EnTDDLQHy5YLFY2c7)から。質問や作品の共有は[Discord](https://discord.gg/qUdTBeSRC)へ。
+
 **MOCAPTYXは、自作カメラと反射マーカーを使って全身の動きを収録し、アバターやモーション制作へつなげるプロジェクトです。**
 
 自分のダンスや演技を撮り、キャラクターに合わせ、モーションとして書き出す。作品づくりやモーション配布に使える環境を目指して開発しています。
 
 > [!NOTE]
 > **いま公開しているもの：プロジェクト紹介・実演映像・配布モーション・開発状況・公開予定・利用条件の方針。**
-> アプリ本体のソース・配布ビルド、自作カメラの設計データ、手指オプションは公開準備中です。
+> アプリ本体のソース・配布ビルド、手指オプションは公開準備中です。
+> 自作カメラは[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開しています。作り方・ケースのデータ・部品表・ファームは、アプリと同時に公開予定です。
 > 完成版のダウンロードやカメラキットの販売は、まだ始まっていません。
 
 ## 動きを見る
@@ -133,7 +137,7 @@ VMCはライブの動きを外部アプリへ送るための別の出力経路�
 | 項目 | 現時点の前提 |
 |---|---|
 | PC | 主にWindowsで開発・検証中。公開版の最低・推奨構成は準備中 |
-| カメラ | 対応する光学式カメラ構成。設計・部品・接続の情報を公開予定 |
+| カメラ | 市販の部品で作るマーカー用カメラ（標準8台）。[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開中。作り方・部品表はアプリと同時に公開予定 |
 | マーカー | 身体に取り付ける反射マーカーと、適切な配置・装着 |
 | 撮影空間 | カメラから身体を観測できる空間と、校正作業 |
 | 制作先 | 必要に応じてMMD、アニメーション制作ツール、VMC受信アプリなど |
@@ -164,7 +168,7 @@ VMCはライブの動きを外部アプリへ送るための別の出力経路�
 |---|---|---|
 | **プロジェクト紹介** | 最初の公開 | このREADME、機能一覧、開発状況、公開予定、利用方針 |
 | **アプリのソース** | 公開予定 | 公開対象のコード、ビルド・導入手順、正式な利用条件 |
-| **自作カメラ** | 公開予定 | 基板・筐体データ、部品表、組み立て・設定手順 |
+| **自作カメラ** | **開発状況を公開** / 作り方・データはアプリと同時に公開予定 | いまの構成・費用の目安・ケースv1/v3を[紹介](https://junonnwork.github.io/mocaptyx/camera.html)。アプリと同時に、作り方、ケースのデータ（STL・STEP）、リンク付きの部品表、ファーム。専用基板は開発中 |
 | **手指オプション** | 公開予定 | 構成、対応範囲、導入・連携方法 |
 | **公式アプリ** | Steam頒布予定 | 導入しやすい配布版。時期・価格・提供内容は未定 |
 | **使い方とサンプル** | 順次準備 | 設置・撮影の例、調整方法、利用例、その他オプション |
@@ -191,7 +195,7 @@ MOCAPTYX自体の製品化・組み込み、カメラやキットの販売は別
 <details>
 <summary><strong>カメラや手指オプションのデータも公開されますか？</strong></summary>
 
-公開を予定しています。カメラは基板・筐体・部品表・組み立て情報、手指は構成・対応範囲・連携方法などを準備します。公開日や確定仕様はまだありません。
+カメラは[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開中で、作り方・ケースのデータ・部品表・ファームはアプリと同時に公開予定です。手指は構成・対応範囲・連携方法などを準備しています。公開日や確定仕様はまだありません。
 
 </details>
 
@@ -224,7 +228,7 @@ MOCAPTYX is a work-in-progress optical motion capture project using DIY cameras 
 It is being developed for capture, recording, retargeting, VMC output, and VMD / FBX / BVH export.
 
 This initial repository contains the project overview, development status, roadmap and licensing direction.
-Application source, distributable builds, camera designs and hand/finger option documentation are planned for later publication.
+Application source, distributable builds and hand/finger option documentation are planned for later publication. The DIY camera's development status is online; its build guide, case files, parts list and firmware will come with the app.
 An official Steam release is also planned; dates and pricing have not been announced.
 
 We intend to allow sharing and selling your own captured motions and videos. For selling or embedding MOCAPTYX itself, camera kits, or a license buyout, please contact us about a separate paid license.
@@ -234,4 +238,4 @@ Business inquiries: [junonn.work@gmail.com](mailto:junonn.work@gmail.com).
 
 ---
 
-MOCAPTYX · by junonnwork · 開発中 · 最終更新：2026-10-15
+MOCAPTYX · by junonnwork · 開発中 · 最終更新：2026-10-21

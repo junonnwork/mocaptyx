@@ -1,0 +1,46 @@
+/* Manual pages (hand.html, hand-en.html): long-form steps on top of motion.css's tokens and header/footer. */
+.guide{max-width:880px;padding-block:60px 80px}
+.guide h1{font-size:clamp(32px,5vw,52px);line-height:1.25;margin:6px 0 0}
+.guide h1 span{color:var(--accent)}
+.guide .lead{font-size:16px;color:var(--muted);line-height:1.9;margin-top:14px}
+.guide .version{display:inline-block;font-size:12px;letter-spacing:.08em;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin-top:16px}
+.guide nav.toc{margin-top:34px;border:1px solid var(--line);border-radius:10px;padding:16px 20px;background:#141b20}
+.guide nav.toc ol{margin:6px 0 0;padding-left:20px;columns:2;column-gap:32px;font-size:14px;line-height:2}
+.guide nav.toc a{color:var(--muted);text-decoration:none}
+.guide nav.toc a:hover{color:var(--accent)}
+.guide section{margin-top:56px;scroll-margin-top:20px}
+.guide h2{font-size:24px;line-height:1.4;margin:0;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.guide h2 small{font-size:12px;color:var(--accent);letter-spacing:.1em;margin-right:10px;font-weight:600}
+.guide h3{font-size:17px;margin:30px 0 0}
+.guide p,.guide li{font-size:14.5px;line-height:1.95;color:#d6dee2}
+.guide p{margin:14px 0 0}
+.guide ul,.guide ol{margin:12px 0 0;padding-left:22px}
+.guide li+li{margin-top:4px}
+.guide a{color:var(--accent);text-underline-offset:4px}
+.guide code,.guide kbd{font-family:Consolas,"Cascadia Mono",monospace;font-size:13px;background:#1b252b;border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:#e8f4f8}
+.guide strong{color:#fff}
+.guide .table{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:10px}
+.guide table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+.guide th,.guide td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+.guide th{background:#141b20;color:var(--muted);font-weight:600;font-size:13px}
+.guide tr:last-child td{border-bottom:0}
+.guide .note,.guide .warn,.guide .tip{margin-top:18px;border-radius:10px;padding:14px 18px;border:1px solid var(--line);background:#141b20}
+.guide .note p:first-child,.guide .warn p:first-child,.guide .tip p:first-child{margin-top:0}
+.guide .warn{border-color:#a8573f;background:#22140f}
+.guide .warn .label{color:#ffb39c}
+.guide .tip .label{color:var(--accent)}
+.guide .label{display:block;font-size:12px;letter-spacing:.1em;font-weight:700;margin-bottom:4px}
+.guide .steps{counter-reset:step;list-style:none;padding-left:0}
+.guide .steps>li{counter-increment:step;position:relative;padding-left:44px;margin-top:14px}
+.guide .steps>li:before{content:counter(step);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-size:13px;display:grid;place-items:center;font-weight:700}
+.guide .downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:18px}
+.guide .downloads a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;background:#141b20}
+.guide .downloads a:hover{border-color:var(--accent)}
+.guide .downloads b{display:block;color:#fff;font-size:15px}
+.guide .downloads span{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.6}
+@media(max-width:700px){
+  .guide{padding-block:36px 56px}
+  .guide nav.toc ol{columns:1}
+  .guide p,.guide li{font-size:14px}
+  .guide .steps>li{padding-left:38px}
+}

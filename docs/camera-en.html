@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101519">
+<title>DIY camera status — MOCAPTYX</title>
+<meta name="description" content="Development status of the MOCAPTYX marker camera: built from off-the-shelf parts (ESP32-P4-ETH, OV9281, 850 nm LED ring, PoE) in a 3D-printed case, v1 and v3, with a rough cost. Build guide and data come with the PC app.">
+<link rel="canonical" href="https://junonnwork.github.io/mocaptyx/camera-en.html"><link rel="alternate" hreflang="ja" href="https://junonnwork.github.io/mocaptyx/camera.html"><link rel="alternate" hreflang="en" href="https://junonnwork.github.io/mocaptyx/camera-en.html">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="motion.css?v=20261015-en"><link rel="stylesheet" href="guide.css?v=20261021">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap"><a class="brand" href="en.html"><img src="assets/mark.svg" width="30" height="30" alt="">mocaptyx</a><span class="status"><i></i> In development</span><div class="header-links"><a class="repo-link" href="https://github.com/junonnwork/mocaptyx/blob/main/README.en.md">Read the README ↗</a><nav class="language-switch" aria-label="Language"><a href="camera.html" lang="ja" hreflang="ja" data-language-link>日本語</a><a href="camera-en.html" lang="en" hreflang="en" aria-current="page" data-language-link>English</a></nav></div></header>
+<main id="main" class="guide wrap">
+<p class="eyebrow">CAMERA · DEVELOPMENT STATUS</p>
+<h1>DIY camera<span>.</span></h1>
+<p class="lead">The MOCAPTYX camera for reflective markers.<br>Today it is built from off-the-shelf parts in a 3D-printed case, and it is in use in our studio.</p>
+<span class="version">Development status · 2026-10-21</span>
+
+<figure style="margin:26px 0 0"><img src="assets/camera-on-pole.jpg" width="1200" height="1200" alt="A camera in a black 3D-printed case, its ring of 36 850 nm LEDs lit around an M12 lens, mounted with a clamp and a small ball head on a floor-to-ceiling pole" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line)">
+<figcaption class="fine" style="margin-top:8px">A camera in our studio (case v1). The LED ring's light is almost invisible to the eye; the photo shows it as purple. It is mounted on a pole with a clamp and a ball head.</figcaption></figure>
+
+<div class="note"><span class="label">No need to buy parts yet</span><p>The build guide, the case files (STL / STEP), the parts list with shop links and the camera firmware will be published <strong>together with the PC app</strong>. A camera built today cannot yet run with MOCAPTYX. This page shows where the camera is now.</p></div>
+
+<div class="tip"><span class="label">Beta testers wanted</span><p><strong>No cameras needed.</strong> Release and test news via the <a href="https://forms.gle/EnTDDLQHy5YLFY2c7">sign-up form</a>; questions and your work on <a href="https://discord.gg/qUdTBeSRC">Discord</a>.</p></div>
+
+<nav class="toc" aria-label="Contents"><strong>Contents</strong><ol>
+<li><a href="#what">What it is</a></li><li><a href="#cost">Rough cost</a></li><li><a href="#case">Case v1 and v3</a></li>
+<li><a href="#board">Own board (in development)</a></li><li><a href="#next">What comes next</a></li>
+</ol></nav>
+
+<section id="what"><h2><small>01</small>What it is</h2>
+<p>Cameras on poles in the corners of the room watch the reflective markers on the body from several directions. Each camera finds the markers' bright points in its own image and sends only their positions to the PC over the LAN.</p>
+<div class="table"><table>
+<tr><th>Part</th><th>What we use now (off the shelf)</th></tr>
+<tr><td>Board</td><td>ESP32-P4-ETH (Waveshare, or a compatible board). Finds the markers in the image and sends them over the LAN</td></tr>
+<tr><td>Power and data</td><td>PoE: one LAN cable for power and data. The LED ring's 12 V comes from a PoE splitter</td></tr>
+<tr><td>Sensor</td><td>An OV9281 camera module (monochrome, global shutter, 1 MP)</td></tr>
+<tr><td>Lens</td><td>A wide M12 lens without an IR-cut filter, behind a film that passes only infrared</td></tr>
+<tr><td>Light</td><td>An 850 nm infrared LED ring (36 LEDs, 12 V). Light from right beside the lens makes reflective markers shine</td></tr>
+<tr><td>Case</td><td>3D-printed (black heat-resistant resin), with a 1/4" thread for a ball head</td></tr>
+</table></div>
+<p>All cameras keep their clocks in step over the LAN and expose at the same instant. The standard rig is <strong>8 cameras</strong> (4 poles, two cameras each).</p>
+</section>
+
+<section id="cost"><h2><small>02</small>Rough cost</h2>
+<div class="table"><table>
+<tr><th></th><th>Guide</th><th>Includes</th></tr>
+<tr><td>Full set of 8</td><td>about ¥200,000</td><td>8 cameras (board and PoE module, camera module, lens, LED ring, PoE splitter, printed case, film, screws, LAN cable), a PoE switch (8 PoE ports) and mounts (4 floor-to-ceiling tension poles, 8 clamps, 8 small ball heads)</td></tr>
+</table></div>
+<p class="fine">A <strong>rough figure</strong>: what the author actually spent on the set in Japan in September and October 2026. PC, markers and shipping are not included. Prices and stock change. The exact parts list comes with the build guide.</p>
+</section>
+
+<section id="case"><h2><small>03</small>Case v1 and v3</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px">
+<figure style="margin:0"><img src="assets/camera-case-v1.jpg" width="577" height="510" alt="Case v1: a box with the LED ring on its front" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#e6e8ec"><figcaption class="fine" style="margin-top:6px">v1: the case in use today</figcaption></figure>
+<figure style="margin:0"><img src="assets/camera-case-v3.jpg" width="581" height="529" alt="Case v3: a twist-lock bezel holds the LED ring on the front" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#e6e8ec"><figcaption class="fine" style="margin-top:6px">v3: the next version (designed)</figcaption></figure>
+</div>
+
+<h3>v1: built, and in use in our studio</h3>
+<p>Eight were printed by an online service (JLC3DP, black heat-resistant resin) and are in use. A home FDM printer did not work well. Using them taught us:</p>
+<ul>
+<li>The connector on the back of the LED ring hits the case front, so the ring does not sit flat.</li>
+<li>The ring's lead is short and barely reaches the back of the case.</li>
+<li>Once the case is closed, a screwdriver cannot reach the camera's screws inside.</li>
+<li>Tightening the clamp hard can pull the 1/4" nut out.</li>
+<li>On boards with downward pin headers, the pins hit the floor of the case.</li>
+<li>The ring just sits on the front with its lead taped down, so a knock can shift it.</li>
+<li>Held by the ball head's single screw, the case turns round it easily.</li>
+</ul>
+
+<h3>v3: the next version, fewer parts and screws</h3>
+<figure style="margin:16px 0 0"><img src="assets/camera-case-v3-parts.jpg" width="916" height="565" alt="Exploded view of case v3: the sleeve that slides on from behind, the front that carries the camera and board, the LED ring, the bezel and the filter cap" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#e6e8ec">
+<figcaption class="fine" style="margin-top:6px">v3's parts, from the left: the sleeve that slides on from behind, the front (camera, board and nut all sit on it), the LED ring, the bezel and the filter cap.</figcaption></figure>
+<ul>
+<li><strong>Four printed parts and four screws</strong> (v1: two parts and 12 screws, plus two optional parts and 3 screws).</li>
+<li>Camera, board and nut all go onto the front part on the bench, with screws a driver reaches straight.</li>
+<li>The LED ring rests on three pads and a twist-lock bezel with spring arms holds it: no screws, and air reaches the ring's back.</li>
+<li>The infrared film goes into a twist-lock cap; take the cap off to refocus without opening the case.</li>
+<li>Radial ridges under the foot bite into the ball head's rubber so the case does not turn, and the nut is pulled into its pocket so it stays put.</li>
+<li>The board sits higher, so boards with downward pins fit, and there is room for a module that flashes the LEDs (for a future strobe).</li>
+</ul>
+<p>v3 has been designed. When the build guide is published, it will come with what we learned from real prints.</p>
+<p class="fine">An LED ring that stays on gives off 3-4 W and warms the resin case. A case that warps moves the camera, so we are opening the ring's back to the air and working on lighting it only during each exposure (strobe).</p>
+</section>
+
+<section id="board"><h2><small>04</small>Own board (in development)</h2>
+<p>Alongside the off-the-shelf build, we are <strong>developing our own camera board</strong>, with fewer parts and less wiring, smaller and easier to assemble. Its timing and contents are not decided yet.</p>
+</section>
+
+<section id="next"><h2><small>05</small>What comes next</h2>
+<p>These will be published together, <strong>with the PC app</strong>:</p>
+<ul>
+<li>The build guide: parts, printing the case, assembly, focusing, the infrared film, LED power, mounting and aiming</li>
+<li>Case files: STL / STEP for v1 and v3, and the scripts that generate them</li>
+<li>The parts list, with shop links and reference prices</li>
+<li>The camera firmware (with the PC app)</li>
+</ul>
+<p>Building cameras for yourself is planned to be free. Selling cameras, cases or kits, or building them into a product, needs a paid licence (<a href="licensing-en.html">licensing policy</a>, <a href="mailto:junonn.work@gmail.com">get in touch</a>).</p>
+<p class="fine">Questions, or information you would like to see: please use the <a href="https://github.com/junonnwork/mocaptyx/issues">issues</a>.</p>
+</section>
+
+<a class="button" href="en.html">Back to MOCAPTYX <span aria-hidden="true">↗</span></a>
+</main>
+<footer class="wrap"><a class="brand" href="en.html">mocaptyx</a><p>by junonnwork · In development</p><a href="https://github.com/junonnwork/mocaptyx">GitHub ↗</a><span>© 2026 junonnwork</span></footer><script src="motion.js?v=20261015-en" defer></script>
+</body></html>

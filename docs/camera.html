@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101519">
+<title>自作カメラ 開発状況 — MOCAPTYX</title>
+<meta name="description" content="MOCAPTYXのマーカー用カメラの開発状況。市販部品（ESP32-P4-ETH、OV9281、850 nm LEDリング、PoE）で作るカメラと、3Dプリントのケース v1・v3、費用の目安。作り方とデータはPCアプリと同時に公開予定です。">
+<link rel="canonical" href="https://junonnwork.github.io/mocaptyx/camera.html"><link rel="alternate" hreflang="ja" href="https://junonnwork.github.io/mocaptyx/camera.html"><link rel="alternate" hreflang="en" href="https://junonnwork.github.io/mocaptyx/camera-en.html">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="motion.css?v=20261015-en"><link rel="stylesheet" href="guide.css?v=20261021">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="wrap"><a class="brand" href="index.html"><img src="assets/mark.svg" width="30" height="30" alt="">mocaptyx</a><span class="status"><i></i> 開発中</span><div class="header-links"><a class="repo-link" href="https://github.com/junonnwork/mocaptyx">READMEを読む ↗</a><nav class="language-switch" aria-label="表示言語"><a href="camera.html" lang="ja" hreflang="ja" aria-current="page" data-language-link>日本語</a><a href="camera-en.html" lang="en" hreflang="en" data-language-link>English</a></nav></div></header>
+<main id="main" class="guide wrap">
+<p class="eyebrow">CAMERA · DEVELOPMENT STATUS</p>
+<h1>自作カメラ<span>。</span></h1>
+<p class="lead">反射マーカーを撮るための、MOCAPTYXのカメラです。<br>いまは市販の部品を組み合わせ、3Dプリントのケースに入れて、実際のスタジオで使っています。</p>
+<span class="version">開発状況 ・ 2026-10-21</span>
+
+<figure style="margin:26px 0 0"><img src="assets/camera-on-pole.jpg" width="1200" height="1200" alt="黒い3Dプリントのケースに入ったカメラ。前面で36個の850 nm LEDが光り、中央にM12レンズ。床から天井までの支柱に、クランプと小さな自由雲台で取り付けている" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line)">
+<figcaption class="fine" style="margin-top:8px">スタジオで使っているカメラ（ケース v1）。LEDリングの光は肉眼ではほとんど見えず、写真では紫っぽく写ります。支柱にクランプと自由雲台で付けています。</figcaption></figure>
+
+<div class="note"><span class="label">部品はまだ買わなくて大丈夫です</span><p>作り方・ケースのデータ（STL / STEP）・リンク付きの部品表・カメラのファームは、<strong>PCアプリと同時に公開</strong>する予定です。カメラだけを先に組んでも、まだMOCAPTYXでは動かせません。このページでは、いまの姿と開発の様子を紹介します。</p></div>
+
+<div class="tip"><span class="label">βテスター募集中</span><p><strong>カメラなしで試せます。</strong>公開やテストのお知らせは<a href="https://forms.gle/EnTDDLQHy5YLFY2c7">登録フォーム</a>から、質問や作品の共有は <a href="https://discord.gg/qUdTBeSRC">Discord</a> へ。</p></div>
+
+<nav class="toc" aria-label="目次"><strong>目次</strong><ol>
+<li><a href="#what">どんなカメラ？</a></li><li><a href="#cost">費用の目安</a></li><li><a href="#case">ケース v1 と v3</a></li>
+<li><a href="#board">専用基板（開発中）</a></li><li><a href="#next">これから公開するもの</a></li>
+</ol></nav>
+
+<section id="what"><h2><small>01</small>どんなカメラ？</h2>
+<p>部屋の四隅に立てた支柱にカメラを付け、体に付けた反射マーカーを、いろいろな方向から撮ります。カメラはマーカーの光の点だけを画像の中から見つけて、その位置をLANでPCへ送ります。</p>
+<div class="table"><table>
+<tr><th>部分</th><th>いま使っているもの（市販品）</th></tr>
+<tr><td>ボード</td><td>ESP32-P4-ETH（Waveshare、または互換品）。カメラの画像からマーカーを見つけ、LANで送ります</td></tr>
+<tr><td>電源・通信</td><td>PoE。LANケーブル1本で電源と通信。LEDリングの12 Vは、PoEスプリッタから取っています</td></tr>
+<tr><td>センサー</td><td>OV9281（白黒・グローバルシャッター・1MP）のカメラモジュール</td></tr>
+<tr><td>レンズ</td><td>M12マウントの広角レンズ（赤外線カットなし）。赤外線だけを通すフィルムを重ねます</td></tr>
+<tr><td>照明</td><td>850 nmの赤外線LEDリング（36個・12 V）。レンズのすぐ横から照らすと、反射マーカーが明るく光ります</td></tr>
+<tr><td>ケース</td><td>3Dプリント（黒い耐熱レジン）。自由雲台用の1/4インチのネジ穴付き</td></tr>
+</table></div>
+<p>全部のカメラはLANを通して時刻を合わせ、同じ瞬間に撮ります。標準は<strong>8台</strong>（4本の支柱に上下2台ずつ）です。</p>
+</section>
+
+<section id="cost"><h2><small>02</small>費用の目安</h2>
+<div class="table"><table>
+<tr><th></th><th>目安</th><th>含まれるもの</th></tr>
+<tr><td>8台一式</td><td>約20万円</td><td>カメラ8台（ボードとPoEモジュール、カメラモジュール、レンズ、LEDリング、PoEスプリッタ、ケースの印刷、フィルム・ネジなど、LANケーブル）、PoEスイッチ（PoE 8ポート）、取り付け金具（突っ張り式の支柱4本、クランプ8個、小さな自由雲台8個）</td></tr>
+</table></div>
+<p class="fine">作者が2026年9〜10月に実際にそろえたときの<strong>おおよその金額</strong>です。PC、反射マーカー、送料は含みません。値段や在庫は変わります。正確な部品表は、作り方と一緒に公開します。</p>
+</section>
+
+<section id="case"><h2><small>03</small>ケース v1 と v3</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px">
+<figure style="margin:0"><img src="assets/camera-case-v1.jpg" width="577" height="510" alt="ケース v1 の図。箱形のケースの前面にLEDリングが付いている" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#e6e8ec"><figcaption class="fine" style="margin-top:6px">v1：いま使っているケース</figcaption></figure>
+<figure style="margin:0"><img src="assets/camera-case-v3.jpg" width="581" height="529" alt="ケース v3 の図。前面のLEDリングを、回して留めるリング押さえが固定している" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#e6e8ec"><figcaption class="fine" style="margin-top:6px">v3：次の版（設計済み）</figcaption></figure>
+</div>
+
+<h3>v1：組み立てて、スタジオで使っています</h3>
+<p>8台ぶんをネット注文の3Dプリント（JLC3DP、黒い耐熱レジン）で作り、実際に使っています。家庭用の3Dプリンター（FDM）では、うまく作れませんでした。使ってみて、次のことが分かりました。</p>
+<ul>
+<li>LEDリングの裏のコネクタがケースの前面に当たり、リングがぴったり付かない。</li>
+<li>LEDリングの線が短く、ケースの後ろまで届きにくい。</li>
+<li>ケースを閉じた後だと、中のカメラのネジにドライバーが届かない。</li>
+<li>クランプを強く締めると、1/4インチのナットが抜けることがある。</li>
+<li>下向きのピンが付いたボードだと、ピンがケースの底に当たる。</li>
+<li>LEDリングは前面に載せて線をテープで留めているだけなので、ぶつけるとずれることがある。</li>
+<li>雲台のネジ1本だけで留めるので、ケースがネジのまわりで回りやすい。</li>
+</ul>
+
+<h3>v3：部品とネジを減らした次の版</h3>
+<figure style="margin:16px 0 0"><img src="assets/camera-case-v3-parts.jpg" width="916" height="565" alt="ケース v3 の分解図。後ろからかぶせるカバー、カメラとボードが載る前面、LEDリング、リング押さえ、フィルターキャップ" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#e6e8ec">
+<figcaption class="fine" style="margin-top:6px">v3 の部品。左から、後ろからかぶせるカバー、前面（カメラ・ボード・ナットがすべて載る）、LEDリング、リング押さえ、フィルターキャップ。</figcaption></figure>
+<ul>
+<li><strong>印刷する部品は4つ、ネジは4本</strong>（v1 は印刷部品2つとネジ12本。任意の部品を使うと、さらに2つと3本）。</li>
+<li>カメラ・ボード・ナットを、机の上で前面の部品にまとめて付けられます。ネジは真っすぐ届く位置にあります。</li>
+<li>LEDリングは3点で支え、回して留めるリング押さえ（ばね付き）で押さえます。ネジは不要で、リングの裏に空気が通ります。</li>
+<li>赤外線フィルムは、回して留めるキャップに入れます。キャップを外せば、分解せずにピントを合わせ直せます。</li>
+<li>底面の放射状の溝が雲台のゴムに食い込み、ケースが回りにくくなります。ナットは引き込んで固定し、抜けにくくしました。</li>
+<li>ボードを高く載せ、下向きのピンが付いたボードでも入ります。LEDを点滅させる部品（将来のストロボ用）の置き場所もあります。</li>
+</ul>
+<p>v3 は設計を終えた段階です。作り方の公開時に、実物で確かめた結果とあわせて案内します。</p>
+<p class="fine">LEDリングは点けたままだと3〜4 Wの熱を出し、樹脂のケースが温まります。熱でケースがゆがむとカメラの向きが変わるため、リングの裏に空気を通す、撮影の瞬間だけ光らせる（ストロボ）といった工夫を進めています。</p>
+</section>
+
+<section id="board"><h2><small>04</small>専用基板（開発中）</h2>
+<p>市販の部品の組み合わせとは別に、カメラ用の<strong>専用基板を開発中</strong>です。部品の数と配線を減らし、もっと小さく、組み立てやすくすることを目指しています。公開の時期や内容は、まだ決まっていません。</p>
+</section>
+
+<section id="next"><h2><small>05</small>これから公開するもの</h2>
+<p>次のものを、<strong>PCアプリの公開と同時に</strong>まとめて公開する予定です。</p>
+<ul>
+<li>作り方（部品の準備、ケースの印刷、組み立て、ピント合わせ、赤外線フィルム、LEDの電源、支柱への取り付けと向き）</li>
+<li>ケースのデータ：v1 と v3 の STL / STEP と、ケースを作るスクリプト</li>
+<li>部品表：購入先のリンクと参考価格つき</li>
+<li>カメラのファーム（PCアプリと一緒に）</li>
+</ul>
+<p>自分用のカメラを作ることは、無償でできる形で公開する予定です。カメラ・ケース・キットの販売や製品への組み込みは、有償ライセンスです（<a href="licensing.html">利用方針</a>、<a href="mailto:junonn.work@gmail.com">ご相談</a>）。</p>
+<p class="fine">ご質問や「こういう情報がほしい」というご要望は、<a href="https://github.com/junonnwork/mocaptyx/issues">Issues</a>へどうぞ。</p>
+</section>
+
+<a class="button" href="index.html">MOCAPTYXのトップへ <span aria-hidden="true">↗</span></a>
+</main>
+<footer class="wrap"><a class="brand" href="index.html">mocaptyx</a><p>by junonnwork · 開発中</p><a href="https://github.com/junonnwork/mocaptyx">GitHub ↗</a><span>© 2026 junonnwork</span></footer><script src="motion.js?v=20261015-en" defer></script>
+</body></html>
