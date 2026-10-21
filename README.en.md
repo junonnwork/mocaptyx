@@ -206,7 +206,7 @@ Materials will be released with their terms after testing and rights checks. Dat
 
 We intend to allow you to share, sell, and monetize motions and videos you capture yourself, without restrictions from MOCAPTYX. We are also preparing to make the source available for learning and modification.
 
-The camera designs (the case, the parts list and our upcoming custom module) are free to use not only for building your own cameras but also for making and selling cameras, cases or kits (our current policy). The conditions: don't use “MOCAPTYX” in your product name or brand (please contact us first if you want to say “MOCAPTYX compatible”); let us know if you sell them; and the seller is responsible for product safety, regulatory compliance in each country, and support.
+The camera designs (the case, the parts list and our upcoming custom module) are free to use not only for building your own cameras but also for making and selling cameras, cases or kits (our current policy). The conditions: don't use “MOCAPTYX” in your product name or brand (please contact us first if you want to say “MOCAPTYX compatible”); let us know if you sell them; and the seller is responsible for product safety, regulatory compliance in each country, and support. The camera firmware is treated the same way: selling cameras with it flashed is free too (the firmware will be published with the app).
 
 Selling or embedding the MOCAPTYX software itself requires a separate paid license. For the hand option (IMU glove), see [its page](https://junonnwork.github.io/mocaptyx/hand-en.html#download) for the terms on selling. For commercial licensing or a license buyout, [get in touch by email](mailto:junonn.work@gmail.com).
 

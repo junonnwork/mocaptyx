@@ -206,7 +206,7 @@ VMCはライブの動きを外部アプリへ送るための別の出力経路�
 
 自分で撮影したモーション・動画の配布や販売、収益化を、MOCAPTYX側で制限しない方針です。ソースの学習・改造もできる形で公開を準備しています。
 
-カメラ（ケース・部品構成・今後の自作モジュール）の設計は、自分用の製作だけでなく、カメラ・ケース・キットとして作って販売することも無償です（現時点の方針）。条件は、製品名やブランドに「MOCAPTYX」を使わないこと（「MOCAPTYX対応」と書く場合は事前にご連絡ください）、販売する場合はご一報いただくこと、製品の安全性・各国の法令への対応・サポートは販売する方が担うことです。
+カメラ（ケース・部品構成・今後の自作モジュール）の設計は、自分用の製作だけでなく、カメラ・ケース・キットとして作って販売することも無償です（現時点の方針）。条件は、製品名やブランドに「MOCAPTYX」を使わないこと（「MOCAPTYX対応」と書く場合は事前にご連絡ください）、販売する場合はご一報いただくこと、製品の安全性・各国の法令への対応・サポートは販売する方が担うことです。カメラのファームウェアも同じ扱いで、書き込んだ状態での販売も無償です（ファームウェアはアプリと一緒に公開します）。
 
 MOCAPTYXのソフト自体の製品化・組み込みは、別途有償ライセンスとなります。手指オプション（IMUグローブ）の販売条件は、[手指オプションのページ](https://junonnwork.github.io/mocaptyx/hand.html#download)をご覧ください。ライセンスの買い取りも含め、[メールでお気軽にご相談ください](mailto:junonn.work@gmail.com)。
 
@@ -260,7 +260,7 @@ This initial repository contains the project overview, development status, roadm
 Application source and distributable builds are planned for later publication. The hand/finger option beta is out, and the DIY camera's development status is online; its build guide, case files, parts list and firmware will come with the app.
 An official Steam release is also planned; dates and pricing have not been announced.
 
-We intend to allow sharing and selling your own captured motions and videos. Camera designs will be free to build and to sell as cameras or kits, with simple conditions. For selling or embedding the MOCAPTYX software itself, or a license buyout, please contact us about a separate paid license.
+We intend to allow sharing and selling your own captured motions and videos. Camera designs and firmware will be free to build, flash and sell as cameras or kits, with simple conditions. For selling or embedding the MOCAPTYX software itself, or a license buyout, please contact us about a separate paid license.
 
 This is a source-available direction, not an OSI open-source license. Final terms will accompany each released component.
 Business inquiries: [junonn.work@gmail.com](mailto:junonn.work@gmail.com).
