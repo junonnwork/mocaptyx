@@ -10,7 +10,7 @@ DIY cameras × Reflective markers × Full-body motion capture
 
 **In development** · Tested on Windows · VMD / FBX / BVH · VMC
 
-[Sample motions](#sample-motions) · [Features](#features) · [Equipment](#equipment) · [Release plans](#release-plans) · [Licensing](#licensing)
+[Sample motions](#sample-motions) · [Features](#features) · [Equipment](#equipment) · [Project pages](#project-pages) · [Release plans](#release-plans) · [Licensing](#licensing)
 
 </div>
 
@@ -28,6 +28,29 @@ Record your dance or performance, fit the motion to a character, and export it. 
 > The application source and distributable builds are being prepared for release. The hand/finger option beta is out.
 > The DIY camera's [development status](https://junonnwork.github.io/mocaptyx/camera-en.html) is online; its build guide, case files, parts list, and firmware will be published together with the app.
 > The finished app and camera kits are not yet available.
+
+## Project pages
+
+Beyond full-body capture: fingers, and the cameras themselves, made by you. Each project page shows where it stands and how to build it.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="https://junonnwork.github.io/mocaptyx/hand-en.html"><img src="docs/assets/hand-demo.jpg" alt="A hand wearing the IMU glove and the hand in the HandCapture window"></a>
+<h3>Hand option</h3>
+<b>Beta out · v0.5 (one IMU per finger)</b><br>
+A glove that measures finger bend and spread with a small IMU board on each finger. Board files, firmware, Windows app and source are published.<br><br>
+<a href="https://junonnwork.github.io/mocaptyx/hand-en.html"><b>Project page →</b></a> · <a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0">Download</a>
+</td>
+<td width="50%" valign="top">
+<a href="https://junonnwork.github.io/mocaptyx/camera-en.html"><img src="docs/assets/camera-on-pole.jpg" alt="A DIY camera mounted on a pole"></a>
+<h3>DIY cameras</h3>
+<b>In development</b><br>
+Marker cameras built from off-the-shelf parts: the current set-up, rough costs and case prototypes. Build guide and files come with the app.<br><br>
+<a href="https://junonnwork.github.io/mocaptyx/camera-en.html"><b>Project page →</b></a>
+</td>
+</tr>
+</table>
 
 ## See it in motion
 

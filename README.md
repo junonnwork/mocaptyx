@@ -10,7 +10,7 @@
 
 **開発中** · Windowsで検証 · VMD / FBX / BVH · VMC
 
-[モーション配布](#モーション配布) · [できること](#できること) · [必要なもの](#必要なもの) · [公開予定](#公開予定) · [利用方針](#利用方針)
+[モーション配布](#モーション配布) · [できること](#できること) · [必要なもの](#必要なもの) · [プロジェクトページ](#プロジェクトページ) · [公開予定](#公開予定) · [利用方針](#利用方針)
 
 </div>
 
@@ -28,6 +28,29 @@
 > アプリ本体のソース・配布ビルドは公開準備中です。手指オプションはβ版を公開しました。
 > 自作カメラは[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開しています。作り方・ケースのデータ・部品表・ファームは、アプリと同時に公開予定です。
 > 完成版のダウンロードやカメラキットの販売は、まだ始まっていません。
+
+## プロジェクトページ
+
+全身キャプチャに加えて、指とカメラも自分で作れるように。それぞれの進み具合と作り方は、プロジェクトページにまとめています。
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="https://junonnwork.github.io/mocaptyx/hand.html"><img src="docs/assets/hand-demo.jpg" alt="IMUグローブを着けた手と、HandCaptureの画面の手"></a>
+<h3>手指オプション</h3>
+<b>β版公開中 · v0.5（1指1IMU版）</b><br>
+指ごとの小さなIMU基板で、指の曲げと開きを測る手袋。基板データ・ファーム・Windowsアプリ・ソースを公開しています。<br><br>
+<a href="https://junonnwork.github.io/mocaptyx/hand.html"><b>プロジェクトページ →</b></a> · <a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0">ダウンロード</a>
+</td>
+<td width="50%" valign="top">
+<a href="https://junonnwork.github.io/mocaptyx/camera.html"><img src="docs/assets/camera-on-pole.jpg" alt="ポールに取り付けた自作カメラ"></a>
+<h3>自作カメラ</h3>
+<b>開発中</b><br>
+市販の部品で作るマーカー用カメラ。いまの構成、費用の目安、ケースの試作を紹介しています。作り方・データはアプリと同時に公開予定です。<br><br>
+<a href="https://junonnwork.github.io/mocaptyx/camera.html"><b>プロジェクトページ →</b></a>
+</td>
+</tr>
+</table>
 
 ## 動きを見る
 
