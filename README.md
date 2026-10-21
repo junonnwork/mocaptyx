@@ -18,6 +18,10 @@
 
 > [!TIP]
 > **βテスター募集中：カメラなしで試せます。**公開やテストのお知らせは[登録フォーム](https://forms.gle/EnTDDLQHy5YLFY2c7)から。質問や作品の共有は[Discord](https://discord.gg/qUdTBeSRC)へ。
+>
+> [![左がMOCAPTYXのライブ、右がMOCAPTYX Stageで動くキャラクター](docs/assets/beta-live-stage.jpg)](https://junonnwork.github.io/mocaptyx/#beta)
+>
+> [動画を見る（30秒）](https://junonnwork.github.io/mocaptyx/#beta) · [Xの告知](https://x.com/non_shopppp/status/2112773021589246366) · [#MOCAPTYX の投稿](https://x.com/hashtag/MOCAPTYX)。βで作った動画は #MOCAPTYX を付けて投稿してください。
 
 **MOCAPTYXは、自作カメラと反射マーカーを使って全身の動きを収録し、アバターやモーション制作へつなげるプロジェクトです。**
 

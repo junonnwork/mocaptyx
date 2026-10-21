@@ -18,6 +18,10 @@ DIY cameras × Reflective markers × Full-body motion capture
 
 > [!TIP]
 > **Beta testers wanted — no cameras needed.** Get release and test news through the [sign-up form](https://forms.gle/EnTDDLQHy5YLFY2c7). Questions and sharing your work: [Discord](https://discord.gg/qUdTBeSRC).
+>
+> [![Left: the MOCAPTYX live view. Right: a character moving in MOCAPTYX Stage](docs/assets/beta-live-stage.jpg)](https://junonnwork.github.io/mocaptyx/en.html#beta)
+>
+> [Watch the video (30 s)](https://junonnwork.github.io/mocaptyx/en.html#beta) · [Announcement on X](https://x.com/non_shopppp/status/2112773021589246366) · [Posts tagged #MOCAPTYX](https://x.com/hashtag/MOCAPTYX). Please tag what you make with the beta #MOCAPTYX.
 
 **MOCAPTYX is a project for capturing full-body movement with DIY cameras and reflective markers, then bringing that motion into character animation and creative work.**
 
