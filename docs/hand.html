@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101519">
+<title>手指オプション β — MOCAPTYX</title>
+<meta name="description" content="MOCAPTYXの手指オプション HandCapture v0.5 β（1指1IMU版）。基板データ、ファーム、アプリを公開。作り方、ファームの書き込み、キャリブレーション、VMC・VRChat OSC・OpenGlovesへの出力まで。">
+<link rel="canonical" href="https://junonnwork.github.io/mocaptyx/hand.html"><link rel="alternate" hreflang="ja" href="https://junonnwork.github.io/mocaptyx/hand.html"><link rel="alternate" hreflang="en" href="https://junonnwork.github.io/mocaptyx/hand-en.html">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="motion.css?v=20261015-en"><link rel="stylesheet" href="guide.css?v=20261021">
+<link rel="stylesheet" href="project.css?v=20261021">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="wrap"><a class="brand" href="index.html"><img src="assets/mark.svg" width="30" height="30" alt="">mocaptyx</a><span class="status"><i></i> 開発中</span><div class="header-links"><a class="repo-link" href="https://github.com/junonnwork/mocaptyx">READMEを読む ↗</a><nav class="language-switch" aria-label="表示言語"><a href="hand.html" lang="ja" hreflang="ja" aria-current="page" data-language-link>日本語</a><a href="hand-en.html" lang="en" hreflang="en" data-language-link>English</a></nav></div></header>
+<main id="main" class="guide wrap">
+<nav class="project-nav" aria-label="プロジェクト"><a href="index.html">トップ</a><a href="hand.html" aria-current="page">手指オプション<span class="tag">β公開中</span></a><a href="camera.html">自作カメラ<span class="tag">開発中</span></a></nav>
+<p class="eyebrow">HAND OPTION · BETA</p>
+<h1>手指オプション<span>。</span></h1>
+<p class="lead">指ごとの小さなIMU基板で、指の曲げと開きを測る手袋です。<br>基板データ・ファーム・アプリをまとめて公開します。自分で作って、自分のアバターの指を動かせます。</p>
+<span class="version">HandCapture v0.5 β ・ 1指1IMU版</span>
+
+<figure style="margin:26px 0 0"><video src="assets/hand-demo.mp4" poster="assets/hand-demo.jpg" controls muted playsinline preload="metadata" style="width:100%;border-radius:10px;border:1px solid var(--line);background:#000"></video>
+<figcaption class="fine" style="margin-top:8px">手袋（試作）とHandCaptureの画面。右の青い手が、手袋で測った指の動きです（約20秒・音声なし）。</figcaption></figure>
+
+<div class="warn"><span class="label">β版です</span><p>実際に組んで動かしている段階の版です。精度や使い勝手は、これから改善します。特に<strong>電池の極性</strong>（<a href="#battery">4章</a>）は、作る前に必ず読んでください。</p></div>
+
+<nav class="toc" aria-label="目次"><strong>目次</strong><ol>
+<li><a href="#what">できること</a></li><li><a href="#parts">用意するもの</a></li><li><a href="#order">基板の発注</a></li>
+<li><a href="#battery">電池（重要）</a></li><li><a href="#build">組み立て</a></li><li><a href="#firmware">ファームの書き込み</a></li>
+<li><a href="#connect">PCとつなぐ</a></li><li><a href="#calib">キャリブレーション</a></li><li><a href="#output">アバターへの出力</a></li>
+<li><a href="#trouble">うまくいかないとき</a></li><li><a href="#known">v0.5の既知の問題と今後</a></li><li><a href="#download">ダウンロードと利用条件</a></li>
+</ol></nav>
+
+<section id="what"><h2><small>01</small>できること</h2>
+<ul>
+<li>5本の指それぞれの<strong>付け根の曲げと開き</strong>、親指の動きを測ります。第2・第3関節は、付け根の曲がりから自然な曲がり方で推定します。</li>
+<li>出力：<strong>VMC</strong>（MOCAPTYX Stageで確認済み。Warudo、VSeeFaceなどにも）。<strong>VRChat OSC</strong>と<strong>OpenGloves</strong>（SteamVR）は、アプリには入っていますが<strong>まだ実機で確認していません</strong>。</li>
+<li>200 Hzで測り、USBドングルかWi-FiでPCへ。両手同時に使えます。キャリブレーションも両手まとめてできます。</li>
+<li>精度の目安（当方の実測）：手を返したり振ったりしている間の指の角度のブレは約2〜4°。</li>
+<li>アプリからボタン1つでファームを書き込めます（開発ツールは不要）。</li>
+</ul>
+</section>
+
+<section id="parts"><h2><small>02</small>用意するもの（片手ぶん）</h2>
+<div class="table"><table>
+<tr><th>もの</th><th>数</th><th>メモ</th></tr>
+<tr><td>メイン基板 GLOVE MAIN v0.1</td><td>1</td><td>手の甲に載せる。ESP32-S3、充電回路、指のコネクタ6個。<a href="#order">発注</a>で部品実装済みにできる</td></tr>
+<tr><td>IMU小基板 GLOVE IMU MINI v0.1</td><td>6</td><td>指用 F ×5、手の甲用 H ×1。1パネル＝12枚＝両手ぶん（F 10＋H 2）</td></tr>
+<tr><td>FFCケーブル</td><td>6</td><td>1.0 mmピッチ・4芯・<strong>Type A</strong>（両端の青い補強板が同じ面）。指は100 mm、手の甲は50〜60 mm</td></tr>
+<tr><td>リチウムポリマー電池</td><td>1</td><td>1セル3.7 V、300 mAh以上、保護回路入り、JST PH 2.0 mm。<strong>極性に注意</strong>（<a href="#battery">4章</a>）</td></tr>
+<tr><td>USBドングル</td><td>1（両手で共通）</td><td><strong>技適マーク付き</strong>のESP32-S3のUSB付き小型ボード。M5Stack AtomS3 Liteで確認（ケースの側面に技適マーク）。Wi-Fiで使うならなくても可</td></tr>
+<tr><td>USB-Cケーブル</td><td>1</td><td>データ通信できるもの（充電専用は不可）</td></tr>
+<tr><td>手袋、両面テープ・布テープ</td><td></td><td>基板を指の上にしっかり固定できるもの</td></tr>
+</table></div>
+<p><img src="assets/hand-main-board.jpg" alt="メイン基板 GLOVE MAIN v0.1。上の辺に指のコネクタ I・M・R・L、左右に THUMB R / THUMB L、下に USB-C と電池コネクタ" style="width:100%;border-radius:10px;margin-top:18px"></p>
+<p class="fine">メイン基板（50×38 mm）。上の辺：I＝人差し指、M＝中指、R＝薬指、L＝小指（Left ではなく Little）。左右：THUMB R / THUMB L（中でつながっていて、親指と手の甲をどちらに挿してもよい）。</p>
+<div class="note"><span class="label">技適（電波法）について</span><p>メイン基板は、技適を取得済みの <strong>ESP32-S3-MINI-1</strong> モジュール（工事設計認証 <strong>R 201-230385</strong>）を、内蔵アンテナのまま使います。モジュールの改造、アンテナの変更、電波の設定（出力・チャンネルなど）を変えたファームの書き込みをすると、日本国内では使えなくなります。ドングルも<strong>技適マーク付きのボード</strong>を使ってください。技適のないボードを日本国内で電波を出して使うことはできません。手袋やキットを販売する場合は、販売する方が表示などの義務を負います（利用条件をご覧ください）。</p></div>
+</section>
+
+<section id="order"><h2><small>03</small>基板の発注（JLCPCB）</h2>
+<p>ダウンロードの「基板データ」に、JLCPCB用のガーバー（zip）、部品表（BOM）、部品配置（CPL）が入っています。</p>
+<h3>メイン基板</h3>
+<ul><li>2層、50×38 mm、厚さ1.0 mm。部品実装（PCBA）は片面（表）。</li>
+<li>ESP32-S3-MINI-1、TCA9548A、MCP73831など、すべてLCSCの部品番号つき。</li></ul>
+<h3>IMU小基板（パネル）</h3>
+<ul><li>パネル 93.0×37.6 mm（2列×6枚）、2層、厚さ0.8 mm、「Panel by Customer」。</li>
+<li>センサー（ICM-42670-P）がJLCの<strong>Standard PCBA</strong>専用部品のため、Economicでは発注できません。表面処理はHASLで可。</li>
+<li>12枚とも同じ銅箔で、部品配置ファイルが「指用はR1、手の甲用はR2」を載せ分けます。備考欄に次の英文を書いてください：<br><code>One design repeated 12 times in a customer panel. R1 or R2 is placed per board as listed in the CPL (boards 1–10: R1, boards 11–12: R2); the unlisted resistor pads stay empty.</code></li>
+<li>当方の注文例：2パネル（両手2セットぶん）で約22,000円（Standard PCBA、2026年10月）。</li></ul>
+<div class="tip"><span class="label">ヒント</span><p>JLCから「切り離しタブをコネクタ側にも付けてよいか」と聞かれることがあります。コネクタの辺は避けてもらうよう返信してください。</p></div>
+</section>
+
+<section id="battery"><h2><small>04</small>電池（重要）</h2>
+<div class="warn"><span class="label">必ず読んでください</span>
+<p>メイン基板v0.1の電池コネクタ（J2）は<strong>「1番ピン＝＋」</strong>です。市販のLiPo（Adafruit式）の多くは<strong>逆</strong>です。この基板には<strong>逆接続の保護がありません</strong>。逆に挿すと一瞬で壊れます。</p>
+<ol class="steps">
+<li>電池は「JST PH 2.0・<strong>1番ピン＝＋（赤線）</strong>」の向きのものを選びます。商品の写真や説明で、線の向きを確かめてから買ってください。</li>
+<li>基板のJ2の横に「＋」の印があります。挿す前に、<strong>赤い線が「＋」側</strong>に来るか目で確認します（テスターがあればなお安心）。</li>
+<li>逆向きなら<strong>挿さないでください</strong>。正しい向きの電池を用意するまでは、USB給電で使えます（全部の機能が使えます）。</li>
+</ol>
+<p>次の版の基板で、市販の向きに合わせて逆接続の保護も付けます。</p></div>
+</section>
+
+<section id="build"><h2><small>05</small>組み立て</h2>
+<ol class="steps">
+<li><strong>小基板を外す</strong>：裏面に「F 0x68」（指用）、「H 0x69」（手の甲用）と書いてあります。縁を持ってタブの所で折り、出っぱりをヤスリで整えます。チップ（黒い四角）は押さないでください。手の甲用Hは、表にも油性ペンで印を付けておくと便利です。</li>
+<li><strong>ケーブルをつなぐ</strong>：両端とも<strong>青い補強板を上</strong>にして差し込み、黒いレバーをパチッと倒します。基板はどれも<strong>部品面を外側</strong>に。片方だけ裏返すとケーブルがねじれ、電源とGNDが入れ替わって壊れます。</li>
+<li><strong>コネクタの割り当て</strong>：I＝人差し指、M＝中指、R＝薬指、L＝小指。親指と手の甲Hは THUMB R / THUMB L のどちらでも（右手なら親指をTHUMB R、左手ならTHUMB Lにすると取り回しが楽）。<br>左手では指の並びと I〜L の並びが逆なので、ケーブルが基板の上で交差します（問題ありません）。</li>
+<li><strong>手袋に付ける</strong>：指用は各指の<strong>付け根の骨（基節骨）の甲側</strong>、親指は親指の基節骨、Hは手の甲の真ん中、メイン基板は手首寄り。向きは適当で大丈夫です（キャリブレーションで測ります）。<strong>2か所ずつしっかり固定</strong>し、ケーブルも指の付け根あたりで留めます。基板がぐらつくと精度が落ちます。</li>
+</ol>
+</section>
+
+<section id="firmware"><h2><small>06</small>ファームの書き込み</h2>
+<ol class="steps">
+<li>HandCaptureを起動します（ダウンロードしたzipを展開して <code>HandCapture.exe</code>）。</li>
+<li>メイン基板の<strong>スライドスイッチをON</strong>にして、USBでPCにつなぎます。OFFだと充電だけで起動しません。</li>
+<li>左の「ファーム書き込み」にポートが出たら「<strong>手袋に書き込む</strong>」。約15秒、終わるまでUSBを抜かないでください。</li>
+<li>ドングルにするボード（AtomS3 Liteなど）も同じパネルで「<strong>ドングルにする</strong>」。</li>
+</ol>
+<p>書き込めないときは、基板のボタン（BOOT）を押したままUSBを挿し直して、もう一度。</p>
+</section>
+
+<section id="connect"><h2><small>07</small>PCとつなぐ</h2>
+<h3>USBドングル（おすすめ）</h3>
+<p>ドングルをPCに挿したまま、手袋のスイッチを入れます。手袋は<strong>電源を入れたときにドングルを探す</strong>ので、順番が逆なら手袋のスイッチを入れ直してください。</p>
+<h3>Wi-Fi</h3>
+<p>手袋はWi-Fiを設定していないと「HandCap-xxxx」という設定用の電波を出します（パスワード <code>handcap1</code>）。スマホでつないで <code>http://192.168.4.1</code> を開き、家のWi-Fi（<strong>2.4 GHz</strong>）を設定します。PCと同じネットワークにしてください。</p>
+<p>つながると、アプリの一覧に手袋が出ます。カードで<strong>右／左</strong>を選び、「センサー」で指を1本ずつ動かして、同じ指のバーが伸びるか確認します。</p>
+</section>
+
+<section id="calib"><h2><small>08</small>キャリブレーション</h2>
+<p>カードの「キャリブレーション」（2台なら一覧の下の「<strong>両手まとめてキャリブレーション</strong>」）。画面の指示どおり約20秒です。</p>
+<ol class="steps">
+<li><strong>平らに置く</strong>：手のひらを下にして、机の上で指をそろえて伸ばし、動かさない。</li>
+<li><strong>手のひらを返す</strong>：指をそろえて<strong>まっすぐ伸ばしたまま</strong>、手を浮かせて、ゆっくり手のひらを上に向けて戻す（2回）。ここで指が曲がったり揺れたりすると精度が落ちます（警告が出たらやり直し）。</li>
+<li><strong>指を曲げる</strong>：ゆっくり指を曲げて伸ばす（2回、親指も一緒に）。</li>
+<li><strong>もう一度平らに置く</strong>。</li>
+</ol>
+<p>起動のたびと、ずれてきたと感じたときは、手を平らに置いて「<strong>合わせ直し</strong>」（基板のボタンでも同じ）。</p>
+</section>
+
+<section id="output"><h2><small>09</small>アバターへの出力</h2>
+<ul>
+<li><strong>VMC</strong>：「出力」タブで送り先（例：<code>127.0.0.1:39539</code>）を設定。MOCAPTYX Stageで確認済みです。Warudo、VSeeFaceなどVMCを受け取れるアプリでも動くはずです。</li>
+<li><strong>VRChat OSC（未検証）</strong>：パー・グー・ピースなど8つのジェスチャーを <code>HandCapGestureL/R</code> などのパラメーターで送ります。</li>
+<li><strong>OpenGloves（未検証）</strong>：SteamVRのOpenGlovesドライバーへ指の曲げと開きを送ります。</li>
+<li>「アバター調整」タブで、アバターごとに曲げの強さや開きを調整して保存できます。</li>
+</ul>
+</section>
+
+<section id="trouble"><h2><small>10</small>うまくいかないとき</h2>
+<div class="table"><table>
+<tr><th>症状</th><th>確認すること</th></tr>
+<tr><td>USBでつないでもPCに出てこない</td><td>スイッチがON か。データ通信できるUSBケーブルか。</td></tr>
+<tr><td>手袋が一覧に出ない</td><td>ドングルを挿してから手袋のスイッチを入れたか。Wi-FiならPCと同じ2.4 GHzのネットワークか。</td></tr>
+<tr><td>「センサーの値が止まっています」と出る</td><td>電源を切って、その基板とケーブルを挿し直す。それでも出るなら小基板の不良の可能性（予備に交換）。</td></tr>
+<tr><td>違う指が動く</td><td>コネクタの割り当て（I・M・R・L）とケーブルを確認。</td></tr>
+<tr><td>手を返すと指が開く・ずれる</td><td>キャリブレーションの2つ目を、指をまっすぐのまま大きく返してやり直す。基板とケーブルがしっかり固定されているか。</td></tr>
+<tr><td>キャリブレーションで警告が出る</td><td>警告に書かれたステップの動きを、ゆっくり大きくしてやり直す。</td></tr>
+</table></div>
+<p>うまくいかないときは、カードの「● 録画」で数十秒録って、<a href="https://github.com/junonnwork/mocaptyx/issues">Issues</a>に添えてもらえると原因を調べやすくなります（保存先は <code>app\hand_capture\recordings</code>）。</p>
+</section>
+
+<section id="known"><h2><small>11</small>v0.5の既知の問題と今後</h2>
+<ul>
+<li>電池コネクタの極性が市販品と逆、逆接続の保護なし（<a href="#battery">4章</a>）。</li>
+<li>左手でケーブルが基板上で交差する。</li>
+<li>親指は、ほかの指より動きが不安定です。</li>
+<li>ケースは未公開（設計中）。</li>
+<li>アプリの画面は日本語のみ。</li>
+<li>VRChat OSCとOpenGlovesへの出力は、まだ実機で確認していません。試した方は<a href="https://github.com/junonnwork/mocaptyx/issues">Issues</a>で教えてもらえると助かります。</li>
+</ul>
+<h3>今後の予定</h3>
+<ul>
+<li><strong>1指2IMU版を検討中</strong>：指の第2関節の上（中節骨）にもIMUを足して、かぎ爪のような曲げも推定ではなく直接測る版です。今の1指1IMU版は、第2・第3関節を付け根の曲がりから推定しています。</li>
+<li><strong>フレキシブル基板版も検討中</strong>：IMUと配線を1枚の薄いフレキ基板にまとめて、ケーブルなしで指に沿わせる版です。</li>
+<li>メイン基板の次の版：電池の極性と逆接続の保護、左手用のコネクタ割り当て、小型化。</li>
+<li>6個のIMUの時刻合わせ、温度補正など、ファームとソフトでの精度向上。</li>
+</ul>
+</section>
+
+<section id="download"><h2><small>12</small>ダウンロードと利用条件</h2>
+<div class="downloads">
+<a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0"><b>アプリ（Windows）</b><span>HandCapture-0.5.0.zip<br>展開して HandCapture.exe。手袋とドングルのファーム入り</span></a>
+<a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0"><b>基板データ</b><span>HandCapture-0.5.0-hardware.zip<br>メイン基板・IMU小基板のガーバー、BOM、CPL</span></a>
+<a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0"><b>ソース</b><span>HandCapture-0.5.0-source.zip<br>アプリ（手指の部分）、ファーム、基板の生成スクリプト</span></a>
+</div>
+<p><strong>利用条件</strong>：ソース公開です（OSSではありません）。個人・非営利での利用、改造、自分用の製作、撮ったモーションや作品の販売・収益化は自由です。手袋・基板・キットの販売や製品への組み込みは、有償ライセンスです（<a href="mailto:junonn.work@gmail.com">ご相談</a>）。詳しくは各zipの <code>LICENSE.txt</code> と<a href="licensing.html">利用方針</a>をご覧ください。</p>
+<p class="fine">電子工作とリチウム電池には、発火・けがの危険があります。製作と使用はご自身の責任でお願いします。<br>無償で公開しているため、返金・交換・個別のサポートや修正はお約束できません。不具合の報告や提案は<a href="https://github.com/junonnwork/mocaptyx/issues">Issues</a>で歓迎します。基板や部品の注文は、各販売元とのお取引になります。<br>記載の会社名・製品名は各社の商標または登録商標です。MOCAPTYXはこれらの企業・団体と提携しておらず、承認も受けていません。</p>
+</section>
+
+<a class="button" href="index.html">MOCAPTYXのトップへ <span aria-hidden="true">↗</span></a>
+</main>
+<footer class="wrap"><a class="brand" href="index.html">mocaptyx</a><p>by junonnwork · 開発中</p><a href="https://github.com/junonnwork/mocaptyx">GitHub ↗</a><span>© 2026 junonnwork</span></footer><script src="motion.js?v=20261015-en" defer></script>
+</body></html>

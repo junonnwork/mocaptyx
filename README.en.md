@@ -25,7 +25,7 @@ Record your dance or performance, fit the motion to a character, and export it. 
 
 > [!NOTE]
 > **Available now: project information, demonstration videos, sample motions, development updates, release plans, and our intended licensing policy.**
-> The application source, distributable builds, and hand/finger options are being prepared for release.
+> The application source and distributable builds are being prepared for release. The hand/finger option beta is out.
 > The DIY camera's [development status](https://junonnwork.github.io/mocaptyx/camera-en.html) is online; its build guide, case files, parts list, and firmware will be published together with the app.
 > The finished app and camera kits are not yet available.
 
@@ -169,7 +169,7 @@ We are testing the full capture-to-export workflow, investigating issues in real
 | **Project information** | Published first | This README, features, development status, plans, and intended licensing policy |
 | **Application source** | Planned | Selected source code, build/setup instructions, and final terms |
 | **DIY cameras** | **Development status online** / build guide and data planned with the app | Current parts, rough cost, and case v1/v3 [shown here](https://junonnwork.github.io/mocaptyx/camera-en.html). With the app: build guide, case files (STL, STEP), parts list with links, firmware. Own camera board in development |
-| **Hand/finger options** | Planned | Hardware configuration, supported scope, setup, and integration |
+| **Hand/finger options** | **Beta out (v0.5, one IMU per finger)** | Board files, firmware, Windows app, source. [Manual](https://junonnwork.github.io/mocaptyx/hand-en.html) |
 | **Official application** | Steam release planned | A packaged distribution; date, price, and contents are not yet announced |
 | **Guides and samples** | Being prepared in stages | Setup and capture examples, adjustment guides, usage examples, and other options |
 
@@ -195,7 +195,7 @@ Not yet. This repository provides project information, demonstration videos, and
 <details>
 <summary><strong>Will camera and hand/finger option data be released?</strong></summary>
 
-For the camera, the [development status](https://junonnwork.github.io/mocaptyx/camera-en.html) is online, and the build guide, case files, parts list, and firmware will be published together with the app. Hand/finger materials will cover configuration, supported scope, and integration. Release dates and final specifications have not been set.
+The hand/finger option beta is out ([manual](https://junonnwork.github.io/mocaptyx/hand-en.html)). For the camera, the [development status](https://junonnwork.github.io/mocaptyx/camera-en.html) is online, and the build guide, case files, parts list, and firmware will be published together with the app. There is no need to buy parts before then.
 
 </details>
 

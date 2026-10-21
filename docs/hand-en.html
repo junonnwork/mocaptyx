@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101519">
+<title>Hand option beta — MOCAPTYX</title>
+<meta name="description" content="MOCAPTYX hand option, HandCapture v0.5 beta (one IMU per finger). Board files, firmware and app, with build, firmware, calibration and VMC / VRChat OSC / OpenGloves output instructions.">
+<link rel="canonical" href="https://junonnwork.github.io/mocaptyx/hand-en.html"><link rel="alternate" hreflang="ja" href="https://junonnwork.github.io/mocaptyx/hand.html"><link rel="alternate" hreflang="en" href="https://junonnwork.github.io/mocaptyx/hand-en.html">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="motion.css?v=20261015-en"><link rel="stylesheet" href="guide.css?v=20261021">
+<link rel="stylesheet" href="project.css?v=20261021">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap"><a class="brand" href="en.html"><img src="assets/mark.svg" width="30" height="30" alt="">mocaptyx</a><span class="status"><i></i> In development</span><div class="header-links"><a class="repo-link" href="https://github.com/junonnwork/mocaptyx/blob/main/README.en.md">Read the README ↗</a><nav class="language-switch" aria-label="Language"><a href="hand.html" lang="ja" hreflang="ja" data-language-link>日本語</a><a href="hand-en.html" lang="en" hreflang="en" aria-current="page" data-language-link>English</a></nav></div></header>
+<main id="main" class="guide wrap">
+<nav class="project-nav" aria-label="Projects"><a href="en.html">Top</a><a href="hand-en.html" aria-current="page">Hand option<span class="tag">BETA</span></a><a href="camera-en.html">DIY cameras<span class="tag">IN DEV</span></a></nav>
+<p class="eyebrow">HAND OPTION · BETA</p>
+<h1>Hand option<span>.</span></h1>
+<p class="lead">A glove that measures finger bend and spread with a small IMU board on each finger.<br>Board files, firmware and the app are published together: build one and drive your avatar's fingers.</p>
+<span class="version">HandCapture v0.5 beta · one IMU per finger</span>
+
+<figure style="margin:26px 0 0"><video src="assets/hand-demo.mp4" poster="assets/hand-demo.jpg" controls muted playsinline preload="metadata" style="width:100%;border-radius:10px;border:1px solid var(--line);background:#000"></video>
+<figcaption class="fine" style="margin-top:8px">The prototype glove and the HandCapture window. The blue hand on the right is the finger motion the glove measures (about 20 s, no audio).</figcaption></figure>
+
+<div class="warn"><span class="label">This is a beta</span><p>It is the version we build and use ourselves; accuracy and ease of use are still improving. Read the <strong>battery polarity</strong> section (<a href="#battery">4</a>) before building.</p></div>
+
+<nav class="toc" aria-label="Contents"><strong>Contents</strong><ol>
+<li><a href="#what">What it does</a></li><li><a href="#parts">What you need</a></li><li><a href="#order">Ordering the boards</a></li>
+<li><a href="#battery">Battery (important)</a></li><li><a href="#build">Assembly</a></li><li><a href="#firmware">Writing the firmware</a></li>
+<li><a href="#connect">Connecting to the PC</a></li><li><a href="#calib">Calibration</a></li><li><a href="#output">Output to your avatar</a></li>
+<li><a href="#trouble">Troubleshooting</a></li><li><a href="#known">Known issues and plans</a></li><li><a href="#download">Downloads and licence</a></li>
+</ol></nav>
+
+<section id="what"><h2><small>01</small>What it does</h2>
+<ul>
+<li>Measures the <strong>base-joint bend and spread</strong> of each finger and the thumb's motion. The middle and end joints are inferred from the base joint the way fingers naturally curl.</li>
+<li>Outputs <strong>VMC</strong> (tested with MOCAPTYX Stage; Warudo, VSeeFace and others too). <strong>VRChat OSC</strong> and <strong>OpenGloves</strong> (SteamVR) are in the app but <strong>not yet tested on real setups</strong>.</li>
+<li>200 Hz, to the PC through a USB dongle or Wi-Fi. Two gloves at once, calibrated together if you like.</li>
+<li>Accuracy (our measurements): finger angles hold within about 2-4 deg while the hand turns over or waves.</li>
+<li>Firmware is written from the app with one button, no development tools.</li>
+</ul>
+<p class="fine">The app's screens are in Japanese for now; this page gives the button names in English with the Japanese label.</p>
+</section>
+
+<section id="parts"><h2><small>02</small>What you need (one hand)</h2>
+<div class="table"><table>
+<tr><th>Part</th><th>Qty</th><th>Notes</th></tr>
+<tr><td>Main board GLOVE MAIN v0.1</td><td>1</td><td>On the back of the hand: ESP32-S3, charger, six finger connectors. Can be ordered assembled (<a href="#order">3</a>)</td></tr>
+<tr><td>IMU board GLOVE IMU MINI v0.1</td><td>6</td><td>Five finger boards (F) and one hand board (H). One panel = 12 boards = both hands (10 F + 2 H)</td></tr>
+<tr><td>FFC cable</td><td>6</td><td>1.0 mm pitch, 4 conductors, <strong>Type A</strong> (stiffeners on the same side at both ends). 100 mm for fingers, 50-60 mm for the hand board</td></tr>
+<tr><td>LiPo battery</td><td>1</td><td>1 cell 3.7 V, 300 mAh or more, with protection circuit, JST PH 2.0 mm. <strong>Mind the polarity</strong> (<a href="#battery">4</a>)</td></tr>
+<tr><td>USB dongle</td><td>1 (shared)</td><td>A small ESP32-S3 board with native USB, <strong>radio-certified for your country</strong>; tested with M5Stack AtomS3 Lite. Optional if you use Wi-Fi</td></tr>
+<tr><td>USB-C cable</td><td>1</td><td>A data cable (charge-only cables will not work)</td></tr>
+<tr><td>Glove, tape</td><td></td><td>Anything that holds the boards firmly on the fingers</td></tr>
+</table></div>
+<p><img src="assets/hand-main-board.jpg" alt="Main board GLOVE MAIN v0.1: finger connectors I, M, R, L along the top edge, THUMB R / THUMB L on the sides, USB-C and battery connector at the bottom" style="width:100%;border-radius:10px;margin-top:18px"></p>
+<p class="fine">Main board (50 x 38 mm). Top edge: I = index, M = middle, R = ring, L = little. Sides: THUMB R / THUMB L, wired in parallel: thumb and hand board may go in either.</p>
+<div class="note"><span class="label">Radio certification</span><p>The main board uses Espressif's <strong>ESP32-S3-MINI-1</strong> module with its own antenna, unmodified (Japan: certification <strong>R 201-230385</strong>; Espressif lists the module's approvals for other regions). Do not modify the module or antenna or write firmware that changes its radio settings. Use a dongle board certified for your country. Anyone selling gloves or kits takes on the labelling and approval duties (see the licence).</p></div>
+</section>
+
+<section id="order"><h2><small>03</small>Ordering the boards (JLCPCB)</h2>
+<p>The "board files" download holds JLCPCB Gerbers (zip), bills of materials (BOM) and placement files (CPL).</p>
+<h3>Main board</h3>
+<ul><li>2 layers, 50 x 38 mm, 1.0 mm thick, assembly (PCBA) on the top side.</li>
+<li>Every part has an LCSC part number (ESP32-S3-MINI-1, TCA9548A, MCP73831, ...).</li></ul>
+<h3>IMU boards (panel)</h3>
+<ul><li>Panel 93.0 x 37.6 mm (2 rows of 6), 2 layers, 0.8 mm, "Panel by Customer".</li>
+<li>The sensor (ICM-42670-P) is a <strong>Standard PCBA</strong> part at JLC, so Economic assembly is not available. HASL is fine.</li>
+<li>All twelve boards share one copper design; the placement file fits R1 on finger boards and R2 on hand boards. Put this in the order remarks:<br><code>One design repeated 12 times in a customer panel. R1 or R2 is placed per board as listed in the CPL (boards 1–10: R1, boards 11–12: R2); the unlisted resistor pads stay empty.</code></li>
+<li>Our order: two panels (two pairs of gloves) for about JPY 22,000 with Standard PCBA (October 2026).</li></ul>
+<div class="tip"><span class="label">Tip</span><p>JLC may ask whether break-off tabs may go on the connector edge. Ask them to keep the connector edges free.</p></div>
+</section>
+
+<section id="battery"><h2><small>04</small>Battery (important)</h2>
+<div class="warn"><span class="label">Please read</span>
+<p>The main board v0.1 battery connector (J2) has <strong>pin 1 = +</strong>. Most retail LiPo cells (Adafruit convention) are wired <strong>the other way</strong>, and this board has <strong>no reverse-polarity protection</strong>: a reversed battery destroys it instantly.</p>
+<ol class="steps">
+<li>Choose a JST PH 2.0 cell wired <strong>pin 1 = + (red)</strong>; check the wire order in the product photos or description before buying.</li>
+<li>Find the "+" mark next to J2 on the board. Before plugging in, check that the <strong>red wire lands on the "+" side</strong> (a multimeter makes it certain).</li>
+<li>If it is reversed, <strong>do not plug it in</strong>. Until you have a correctly wired cell, run the glove on USB power (everything works).</li>
+</ol>
+<p>The next board revision follows the retail convention and adds reverse protection.</p></div>
+</section>
+
+<section id="build"><h2><small>05</small>Assembly</h2>
+<ol class="steps">
+<li><strong>Break off the IMU boards.</strong> The back says "F 0x68" (finger) or "H 0x69" (hand). Hold the edges, snap at the tabs and file the stubs. Do not press on the chip (the black square). Mark the H boards on the front too.</li>
+<li><strong>Connect the cables</strong> with the <strong>blue stiffener up at both ends</strong>, then press the black latch down until it clicks. Mount every board <strong>component side out</strong>: flipping only one end twists the cable and swaps power and ground.</li>
+<li><strong>Connector map</strong>: I = index, M = middle, R = ring, L = little. Thumb and hand board H go in THUMB R / THUMB L, either way round (thumb in THUMB R for a right hand and THUMB L for a left hand routes best).<br>On a left hand the fingers run opposite to I..L, so the cables cross over the board; that is fine.</li>
+<li><strong>On the glove</strong>: finger boards on the back of each <strong>proximal phalanx</strong> (between the knuckle and the second joint), the thumb board on the thumb's proximal phalanx, H in the middle of the back of the hand, the main board towards the wrist. Orientation does not matter (calibration measures it). <strong>Fix each board in two places</strong> and tape the cable near the knuckle: a wobbling board costs accuracy.</li>
+</ol>
+</section>
+
+<section id="firmware"><h2><small>06</small>Writing the firmware</h2>
+<ol class="steps">
+<li>Start HandCapture (unzip the download and run <code>HandCapture.exe</code>).</li>
+<li>Turn the main board's <strong>slide switch ON</strong> and connect it by USB. When OFF it only charges and does not start.</li>
+<li>When its port appears in the firmware panel (ファーム書き込み), press <strong>手袋に書き込む</strong> (write glove firmware). About 15 s; keep USB connected.</li>
+<li>For the dongle board (AtomS3 Lite etc.), press <strong>ドングルにする</strong> (make dongle) in the same panel.</li>
+</ol>
+<p>If writing will not start, hold the board's button (BOOT) while plugging in USB and try again.</p>
+</section>
+
+<section id="connect"><h2><small>07</small>Connecting to the PC</h2>
+<h3>USB dongle (recommended)</h3>
+<p>With the dongle in the PC, switch the glove on. The glove <strong>looks for the dongle when it powers up</strong>: if you plugged the dongle in later, switch the glove off and on.</p>
+<h3>Wi-Fi</h3>
+<p>Until Wi-Fi is set, the glove opens a set-up network "HandCap-xxxx" (password <code>handcap1</code>). Join it with a phone, open <code>http://192.168.4.1</code> and enter your <strong>2.4 GHz</strong> Wi-Fi. The PC must be on the same network.</p>
+<p>The glove then appears in the app. Choose <strong>右 / 左</strong> (right / left) on its card, and in the sensor view move one finger at a time: the same finger's bar should grow.</p>
+</section>
+
+<section id="calib"><h2><small>08</small>Calibration</h2>
+<p>Press <strong>キャリブレーション</strong> (calibrate) on the card, or with two gloves <strong>両手まとめてキャリブレーション</strong> (calibrate both hands) below the list. About 20 s, following the screen.</p>
+<ol class="steps">
+<li><strong>Flat</strong>: palm down on the desk, fingers straight and together, still.</li>
+<li><strong>Turn over</strong>: keep the fingers <strong>straight and together</strong>, lift the hand and slowly turn the palm up and back (twice). Fingers bending or wobbling here costs accuracy; redo it if a warning appears.</li>
+<li><strong>Curl</strong>: slowly bend and straighten the fingers (twice, thumb too).</li>
+<li><strong>Flat again</strong>.</li>
+</ol>
+<p>At every start, and whenever it drifts, lay the hand flat and press <strong>合わせ直し</strong> (re-zero), or the board's button.</p>
+</section>
+
+<section id="output"><h2><small>09</small>Output to your avatar</h2>
+<ul>
+<li><strong>VMC</strong>: set the target in the output tab (e.g. <code>127.0.0.1:39539</code>). Tested with MOCAPTYX Stage; other VMC receivers such as Warudo and VSeeFace should work.</li>
+<li><strong>VRChat OSC (untested)</strong>: eight gestures (open, fist, peace, ...) as <code>HandCapGestureL/R</code> and related parameters.</li>
+<li><strong>OpenGloves (untested)</strong>: finger bend and spread to the OpenGloves SteamVR driver.</li>
+<li>The avatar tab (アバター調整) stores per-avatar bend and spread tuning.</li>
+</ul>
+</section>
+
+<section id="trouble"><h2><small>10</small>Troubleshooting</h2>
+<div class="table"><table>
+<tr><th>Symptom</th><th>Check</th></tr>
+<tr><td>The PC does not see the glove on USB</td><td>Is the switch ON? Is the cable a data cable?</td></tr>
+<tr><td>The glove does not appear in the app</td><td>Was the dongle plugged in before the glove was switched on? On Wi-Fi: same 2.4 GHz network as the PC?</td></tr>
+<tr><td>"センサーの値が止まっています" (a sensor is frozen)</td><td>Switch off, reseat that board and cable. If it persists the IMU board may be faulty: use a spare.</td></tr>
+<tr><td>The wrong finger moves</td><td>Check the connector map (I, M, R, L) and cables.</td></tr>
+<tr><td>Fingers spread or drift when the hand turns over</td><td>Redo calibration step 2 with straight fingers and a full turn. Are boards and cables fixed firmly?</td></tr>
+<tr><td>Calibration warns</td><td>Redo the step it names, slower and larger.</td></tr>
+</table></div>
+<p>When something is off, record a few tens of seconds with <strong>● 録画</strong> (record) on the card and attach it to an <a href="https://github.com/junonnwork/mocaptyx/issues">issue</a> (saved in <code>app\hand_capture\recordings</code>).</p>
+</section>
+
+<section id="known"><h2><small>11</small>v0.5 known issues and plans</h2>
+<ul>
+<li>Battery connector polarity opposite to retail cells, no reverse protection (<a href="#battery">4</a>).</li>
+<li>On a left hand the cables cross over the board.</li>
+<li>The thumb is less stable than the other fingers.</li>
+<li>No case yet (in design).</li>
+<li>The app's screens are Japanese only.</li>
+<li>VRChat OSC and OpenGloves output have not been tested on real setups yet. If you try them, please tell us in the <a href="https://github.com/junonnwork/mocaptyx/issues">issues</a>.</li>
+</ul>
+<h3>Plans</h3>
+<ul>
+<li><strong>Two IMUs per finger (under consideration)</strong>: a second IMU over the middle phalanx, so hooked fingers are measured rather than inferred. This one-IMU version infers the middle and end joints from the base joint.</li>
+<li><strong>Flexible-PCB version (under consideration)</strong>: IMUs and wiring on one thin flex circuit along each finger, no cables.</li>
+<li>Next main board: battery polarity and reverse protection, a left-hand connector order, smaller.</li>
+<li>Time-aligning the six IMUs, temperature compensation and other firmware and software accuracy work.</li>
+</ul>
+</section>
+
+<section id="download"><h2><small>12</small>Downloads and licence</h2>
+<div class="downloads">
+<a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0"><b>App (Windows)</b><span>HandCapture-0.5.0.zip<br>Unzip and run HandCapture.exe; glove and dongle firmware included</span></a>
+<a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0"><b>Board files</b><span>HandCapture-0.5.0-hardware.zip<br>Gerbers, BOM and CPL for the main and IMU boards</span></a>
+<a href="https://github.com/junonnwork/mocaptyx/releases/tag/hand-v0.5.0"><b>Source</b><span>HandCapture-0.5.0-source.zip<br>The app's hand part, firmware, board generator scripts</span></a>
+</div>
+<p><strong>Licence</strong>: source-available, not open source. Personal and non-commercial use, modification, building your own, and selling or monetising the motion and works you make are free. Selling gloves, boards or kits, or building the Materials into a product, needs a paid licence (<a href="mailto:junonn.work@gmail.com">get in touch</a>). See <code>LICENSE.txt</code> in each zip and the <a href="licensing-en.html">licensing policy</a>.</p>
+<p class="fine">Electronics and lithium batteries can cause fire and injury. You build and use them at your own risk.<br>Published free of charge: no refunds, replacements, individual support or fixes are promised. Bug reports and ideas are welcome in the <a href="https://github.com/junonnwork/mocaptyx/issues">issues</a>. Boards and parts you order are between you and the seller.<br>All company and product names are trademarks or registered trademarks of their owners. MOCAPTYX is not affiliated with or endorsed by them.</p>
+</section>
+
+<a class="button" href="en.html">Back to MOCAPTYX <span aria-hidden="true">↗</span></a>
+</main>
+<footer class="wrap"><a class="brand" href="en.html">mocaptyx</a><p>by junonnwork · In development</p><a href="https://github.com/junonnwork/mocaptyx">GitHub ↗</a><span>© 2026 junonnwork</span></footer><script src="motion.js?v=20261015-en" defer></script>
+</body></html>

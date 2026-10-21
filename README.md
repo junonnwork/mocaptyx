@@ -25,7 +25,7 @@
 
 > [!NOTE]
 > **いま公開しているもの：プロジェクト紹介・実演映像・配布モーション・開発状況・公開予定・利用条件の方針。**
-> アプリ本体のソース・配布ビルド、手指オプションは公開準備中です。
+> アプリ本体のソース・配布ビルドは公開準備中です。手指オプションはβ版を公開しました。
 > 自作カメラは[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開しています。作り方・ケースのデータ・部品表・ファームは、アプリと同時に公開予定です。
 > 完成版のダウンロードやカメラキットの販売は、まだ始まっていません。
 
@@ -169,7 +169,7 @@ VMCはライブの動きを外部アプリへ送るための別の出力経路�
 | **プロジェクト紹介** | 最初の公開 | このREADME、機能一覧、開発状況、公開予定、利用方針 |
 | **アプリのソース** | 公開予定 | 公開対象のコード、ビルド・導入手順、正式な利用条件 |
 | **自作カメラ** | **開発状況を公開** / 作り方・データはアプリと同時に公開予定 | いまの構成・費用の目安・ケースv1/v3を[紹介](https://junonnwork.github.io/mocaptyx/camera.html)。アプリと同時に、作り方、ケースのデータ（STL・STEP）、リンク付きの部品表、ファーム。専用基板は開発中 |
-| **手指オプション** | 公開予定 | 構成、対応範囲、導入・連携方法 |
+| **手指オプション** | **β版を公開（v0.5・1指1IMU版）** | 基板データ、ファーム、Windowsアプリ、ソース。[説明書](https://junonnwork.github.io/mocaptyx/hand.html) |
 | **公式アプリ** | Steam頒布予定 | 導入しやすい配布版。時期・価格・提供内容は未定 |
 | **使い方とサンプル** | 順次準備 | 設置・撮影の例、調整方法、利用例、その他オプション |
 
@@ -195,7 +195,7 @@ MOCAPTYX自体の製品化・組み込み、カメラやキットの販売は別
 <details>
 <summary><strong>カメラや手指オプションのデータも公開されますか？</strong></summary>
 
-カメラは[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開中で、作り方・ケースのデータ・部品表・ファームはアプリと同時に公開予定です。手指は構成・対応範囲・連携方法などを準備しています。公開日や確定仕様はまだありません。
+手指オプションはβ版を公開しました（[説明書](https://junonnwork.github.io/mocaptyx/hand.html)）。カメラは[開発状況](https://junonnwork.github.io/mocaptyx/camera.html)を公開中で、作り方・ケースのデータ・部品表・ファームはアプリと同時に公開する予定です。それまでは、部品を買わずにお待ちいただいて大丈夫です。
 
 </details>
 
@@ -228,7 +228,7 @@ MOCAPTYX is a work-in-progress optical motion capture project using DIY cameras 
 It is being developed for capture, recording, retargeting, VMC output, and VMD / FBX / BVH export.
 
 This initial repository contains the project overview, development status, roadmap and licensing direction.
-Application source, distributable builds and hand/finger option documentation are planned for later publication. The DIY camera's development status is online; its build guide, case files, parts list and firmware will come with the app.
+Application source and distributable builds are planned for later publication. The hand/finger option beta is out, and the DIY camera's development status is online; its build guide, case files, parts list and firmware will come with the app.
 An official Steam release is also planned; dates and pricing have not been announced.
 
 We intend to allow sharing and selling your own captured motions and videos. For selling or embedding MOCAPTYX itself, camera kits, or a license buyout, please contact us about a separate paid license.
